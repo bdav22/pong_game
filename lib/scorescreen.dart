@@ -22,6 +22,7 @@ class ScoreScreen extends StatelessWidget {
     return gameHasStarted ? Stack(
       children: [
 
+        //divider line
       Container(
         alignment: Alignment(0,0),
         child: Container(
@@ -32,6 +33,7 @@ class ScoreScreen extends StatelessWidget {
       ),
 
 
+      //enemy score
       Container(
         alignment: Alignment(0,-0.3),
         child: Text(
@@ -42,6 +44,7 @@ class ScoreScreen extends StatelessWidget {
 
 
 
+      //player score
       Container(
         alignment: Alignment(0,0.3),
         child: Text(

@@ -1,12 +1,16 @@
-import 'dart:async';
 
+
+//import files
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pong/ball.dart';
-import 'package:pong/brick.dart';
+import 'package:pong/paddle.dart';
 import 'package:pong/coverscreen.dart';
 import 'package:pong/scorescreen.dart';
 
+
+//constructor
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -19,12 +23,12 @@ class HomePage extends StatefulWidget {
 //contains the possible directions the ball can travel
 enum direction { UP, DOWN, LEFT, RIGHT }
 
-
+//homepage class
 class _HomePageState extends State<HomePage> {
 
   //player variables (bottom brick)
-  double playerX = 0;
-  double brickWidth = 0.4; // out of 2
+  double userX = 0;
+  double paddleWidth = 0.4; // out of 2
   int playerScore = 0;
 
   //enemy variables (top brick)
@@ -73,6 +77,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  //keeps enemy position in line with ball
   void moveEnemy(){
     setState(() {
       enemyX = ballX;
@@ -83,7 +88,7 @@ class _HomePageState extends State<HomePage> {
   //testing AI vs AI method
   void moveAiPlayer() {
     setState(() {
-      playerX = ballX;
+      userX = ballX;
     });
   }
 
@@ -95,10 +100,10 @@ class _HomePageState extends State<HomePage> {
          barrierDismissible: false,
          builder: (BuildContext context) {
            return AlertDialog(
-             backgroundColor: Colors.deepPurple,
+             backgroundColor: Colors.deepOrange[800],
              title: Center(
                child: Text(
-                 enemyDied ? "Pink Win" : "Purple Win",
+                 enemyDied ? "Pink Win" : "Orange Wins!",
                  style: TextStyle(color: Colors.white),
                ),
              ),
@@ -113,11 +118,11 @@ class _HomePageState extends State<HomePage> {
                          ? Colors.pink[100]
                          : Colors.pink[100],
                      child: Text(
-                       'Play Again',
+                       'Play Again?',
                        style: TextStyle(
                            color: enemyDied
-                               ? Colors.pink[800]
-                               : Colors.deepPurple[800]
+                               ? Colors.deepOrangeAccent[800]
+                               : Colors.deepOrange[800]
                      ),
                    ),
                  ),
@@ -137,7 +142,7 @@ class _HomePageState extends State<HomePage> {
       gameHasStarted = false;
       ballX = 0;
       ballY = 0;
-      playerX = -0.2;
+      userX = -0.2;
       enemyX = -0.2;
     });
   }
@@ -164,7 +169,7 @@ void updateDirection() {
     setState(() {
 
       // update vertical direction
-      if (ballY >= 0.9 && playerX + brickWidth >= ballX && playerX <= ballX) {
+      if (ballY >= 0.9 && userX + paddleWidth >= ballX && userX <= ballX) {
         ballYDirection = direction.UP;
       } else if (ballY <= -0.9) {
         ballYDirection = direction.DOWN;
@@ -210,8 +215,8 @@ void moveBall() {
 //method to move left. updates user brick to the left of the current pos
 void moveLeft() {
     setState(() {
-      if (!(playerX - 0.1 <= -1)) {
-        playerX -= 0.1;
+      if (!(userX - 0.1 <= -1)) {
+        userX -= 0.1;
       }
 
     });
@@ -222,8 +227,8 @@ void moveLeft() {
 //method to move right. updates user brick to the right of the current pos
 void moveRight() {
     setState(() {
-      if (!(playerX + brickWidth >= 1)) {
-        playerX += 0.1;
+      if (!(userX + paddleWidth >= 1)) {
+        userX += 0.1;
       }
 
     });
@@ -248,6 +253,8 @@ void moveRight() {
           moveRight();
         }
       },
+
+      //when the user taps the screen start the game
       child: GestureDetector(
         onTap: startGame,
         child: Scaffold(
@@ -269,10 +276,10 @@ void moveRight() {
                 ),
 
                 //top brick (enemy brick)
-                MyBrick(
+                Paddle(
                   x: enemyX,
                   y: -0.9,
-                  brickWidth: brickWidth,
+                  paddleWidth: paddleWidth,
                   thisIsEnemy: true,
                 ),
 
@@ -280,11 +287,12 @@ void moveRight() {
 
 
                 //bottom brick (player)
-                MyBrick(
-                    x: playerX,
+                Paddle(
+                    x: userX,
                     y: 0.9,
-                    brickWidth: brickWidth,
-                    thisIsEnemy: false,
+                    paddleWidth: paddleWidth,
+                    thisIsEnemy: false
+                  ,
                 ),
 
 

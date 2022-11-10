@@ -25,7 +25,7 @@ class MyBall extends StatelessWidget {
     )
         : Container(
       alignment: Alignment(x,y),
-      child: AvatarGlow(
+      child: AvatarGlow( //adds glowing ring to ball at start of game
         endRadius: 60.0,
         child: CircleAvatar(
           backgroundColor: Colors.grey[100],
