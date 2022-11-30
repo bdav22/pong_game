@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
     Timer.periodic(Duration(milliseconds: 1), (timer) {
 
       //update direction
-      updateDirection();
+      updateBall();
 
       //move the ball
       moveBall();
@@ -135,10 +135,12 @@ class _HomePageState extends State<HomePage> {
 
   }
 
-
+//function to reset the game
   void resetGame() {
     Navigator.pop(context);
     setState(() {
+
+      //reset game started bool to false and reset ball pos
       gameHasStarted = false;
       ballX = 0;
       ballY = 0;
@@ -147,7 +149,9 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+
   bool isPlayerDead() {
+    //if the y pos of user is out of bounds
     if (ballY >= 1) {
       return true;
     }
@@ -155,7 +159,9 @@ class _HomePageState extends State<HomePage> {
     return false;
   }
 
+
   bool isEnemyDead() {
+    //if the y pos of enemy is out of bounds
     if (ballY <= -1) {
       return true;
     }
@@ -165,7 +171,7 @@ class _HomePageState extends State<HomePage> {
 
 
   //updates the current direction of the ball
-void updateDirection() {
+void updateBall() {
     setState(() {
 
       // update vertical direction
@@ -188,6 +194,7 @@ void updateDirection() {
     });
 }
 
+//function to move the ball
 void moveBall() {
     setState(() {
 
