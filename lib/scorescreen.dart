@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 class ScoreScreen extends StatelessWidget {
 
-
+  //variable inits
   final bool gameHasStarted;
   final enemyScore;
   final playerScore;
 
+  //constructor
   ScoreScreen({required this.gameHasStarted, this.enemyScore, this.playerScore});
 
 
