@@ -29,7 +29,7 @@ class ScoreScreen extends StatelessWidget {
         child: Container(
           height: 1,
           width: MediaQuery.of(context).size.width / 4,
-          color: Colors.grey[800],
+          color: Colors.grey[700],
         ),
       ),
 
@@ -50,7 +50,7 @@ class ScoreScreen extends StatelessWidget {
         alignment: Alignment(0,0.3),
         child: Text(
           playerScore.toString(),
-          style: TextStyle(color: Colors.grey[800], fontSize: 75),
+          style: TextStyle(color: Colors.grey[700], fontSize: 75),
         ),
       ),
     ],

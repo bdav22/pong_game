@@ -65,14 +65,14 @@ class _HomePageState extends State<HomePage> {
       if(isUserDead()) {
         enemyScore++;
         timer.cancel();
-        _showDialog(false);
+        playAgainPrompt(false);
       }
 
       //
       if (isEnemyDead()) {
         playerScore++;
         timer.cancel();
-        _showDialog(true);
+        playAgainPrompt(true);
       }
 
     });
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
 
 
   //prompts the user to play again
-  void _showDialog(bool enemyDied) {
+  void playAgainPrompt(bool enemyDied) {
      showDialog(
          context: context,
          barrierDismissible: false,
@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
              backgroundColor: Colors.deepOrange[800],
              title: Center(
                child: Text(
-                 enemyDied ? "Pink Win" : "Orange Wins!",
+                 enemyDied ? "Blue Win" : "Orange Wins!",
                  style: TextStyle(color: Colors.white),
                ),
              ),
@@ -116,8 +116,8 @@ class _HomePageState extends State<HomePage> {
                    child: Container(
                      padding: EdgeInsets.all(7),
                      color: enemyDied
-                         ? Colors.pink[100]
-                         : Colors.pink[100],
+                         ? Colors.blue[100]
+                         : Colors.blue[100],
                      child: Text(
                        'Play Again?',
                        style: TextStyle(
@@ -245,8 +245,6 @@ void moveRight() {
 
 }
 
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -285,7 +283,7 @@ void moveRight() {
                   playerScore: playerScore,
                 ),
 
-                //top brick (enemy brick)
+                //top paddle (enemy)
                 Paddle(
                   x: enemyX,
                   y: -0.9,
@@ -296,7 +294,7 @@ void moveRight() {
 
 
 
-                //bottom brick (player)
+                //bottom paddle (player)
                 Paddle(
                     x: userX,
                     y: 0.9,

@@ -14,6 +14,8 @@ class MyBall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return gameHasStarted
+
+    //----------BASIC BALL IMPLEMENTATION--------------
         ? Container(
             alignment: Alignment(x,y),
             child: Container(
@@ -23,6 +25,9 @@ class MyBall extends StatelessWidget {
               height: 14,
       ),
     )
+
+
+    //-----------GLOWING RING IMPLEMENTATION------------
         : Container(
       alignment: Alignment(x,y),
       child: AvatarGlow( //adds glowing ring to ball at start of game
