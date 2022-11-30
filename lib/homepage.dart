@@ -62,12 +62,13 @@ class _HomePageState extends State<HomePage> {
       moveEnemy();
 
       //check if player is dead
-      if(isPlayerDead()) {
+      if(isUserDead()) {
         enemyScore++;
         timer.cancel();
         _showDialog(false);
       }
 
+      //
       if (isEnemyDead()) {
         playerScore++;
         timer.cancel();
@@ -150,7 +151,8 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-  bool isPlayerDead() {
+  //function to check if player is dead
+  bool isUserDead() {
     //if the y pos of user is out of bounds
     if (ballY >= 1) {
       return true;
@@ -160,6 +162,7 @@ class _HomePageState extends State<HomePage> {
   }
 
 
+  //function to check if enemy is dead
   bool isEnemyDead() {
     //if the y pos of enemy is out of bounds
     if (ballY <= -1) {
